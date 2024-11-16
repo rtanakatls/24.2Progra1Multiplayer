@@ -171,6 +171,8 @@ MonoBehaviour:
   playerNameText: {fileID: 7757499955922033223}
   blueMaterial: {fileID: 2100000, guid: adebbae96a3359e46b01e5e761b73f71, type: 2}
   redMaterial: {fileID: 2100000, guid: 69e7bcd361f909749a433e963fdae9d4, type: 2}
+  bulletPrefab: {fileID: 2617010807083145292, guid: f794aa1194d87d3408e7baa1b5d5f847,
+    type: 3}
 --- !u!136 &3822017948276454228
 CapsuleCollider:
   m_ObjectHideFlags: 0
