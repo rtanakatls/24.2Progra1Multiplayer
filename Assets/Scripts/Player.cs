@@ -2,7 +2,7 @@ using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class Player : MonoBehaviourPun
 {
     private static GameObject localInstance;
@@ -11,13 +11,15 @@ public class Player : MonoBehaviourPun
     [SerializeField] private float speed;
 
     public static GameObject LocalInstance { get { return localInstance; } }
-    
+
+    [SerializeField] private TextMeshPro playerNameText;
 
     private void Awake()
     {
-        if(photonView.IsMine)
+        if (photonView.IsMine)
         {
             localInstance = gameObject;
+            playerNameText.text=GameData.playerName;
         }
         DontDestroyOnLoad(gameObject);
         rb = GetComponent<Rigidbody>();
@@ -32,5 +34,9 @@ public class Player : MonoBehaviourPun
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
         rb.velocity = new Vector3(horizontal * speed, rb.velocity.y, vertical * speed);
+        if (horizontal != 0 || vertical != 0)
+        {
+            transform.forward = new Vector3(horizontal, 0, vertical);
+        }
     }
 }

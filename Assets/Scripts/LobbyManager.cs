@@ -2,17 +2,25 @@ using Photon.Pun;
 using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LobbyManager : MonoBehaviourPunCallbacks
 {
+    [SerializeField] private Button startButton;
+    [SerializeField] private TMP_InputField playerNameInputField;
+
     private void Awake()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
+        startButton.onClick.AddListener(OnClicked);
     }
 
-    private void Start()
+
+    private void OnClicked()
     {
+        GameData.playerName = playerNameInputField.text;
         PhotonNetwork.ConnectUsingSettings();
     }
 
