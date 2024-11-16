@@ -14,13 +14,24 @@ public class Player : MonoBehaviourPun
 
     [SerializeField] private TextMeshPro playerNameText;
 
+    [SerializeField] private Material blueMaterial;
+    [SerializeField] private Material redMaterial;
+
+    private MeshRenderer meshRenderer;
+
     private void Awake()
     {
+        meshRenderer=GetComponent<MeshRenderer>();
         if (photonView.IsMine)
         {
             localInstance = gameObject;
             playerNameText.text=GameData.playerName;
             photonView.RPC("SetName", RpcTarget.AllBuffered, GameData.playerName);
+            meshRenderer.material= blueMaterial;
+        }
+        else
+        {
+            meshRenderer.material = redMaterial;
         }
         DontDestroyOnLoad(gameObject);
         rb = GetComponent<Rigidbody>();
